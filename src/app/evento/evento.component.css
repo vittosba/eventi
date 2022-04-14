@@ -1,0 +1,65 @@
+.container {
+    margin-top: 120px;
+}
+
+img {
+    width: 100%;
+}
+
+
+.card-dettaglio {
+    background: #ffc107;
+    border-radius: 10px;
+    border: 1px solid #21252A;
+}
+
+.quando-dettaglio {
+    text-align: center;
+    border-right: 3px solid #21252A;
+}
+
+.quando-dettaglio .giorno {
+    font-size: 32px;
+}
+
+.dove-dettaglio  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dove-dettaglio .citta {
+    font-size: 32px;
+}
+
+.dettaglio-btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #21252A;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid #21252A;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.dettaglio-btn:hover {
+    background: #21252A;
+    color: #ffc107;
+}
+
+
+@media screen and (max-width: 992px){
+    .container {
+        margin-top: 200px;
+    }
+}

@@ -1,0 +1,13 @@
+<div [routerLink] = "['/evento', evento.id]"  class="evento-card cursor-pointer">
+    <div class="layover">
+        <div class="card-img mb-3">
+            <img :src="{{ evento.img }}">
+        </div>
+        <div class="card-details">
+            <div>{{evento.category}}</div>
+            <h2>{{ evento.title }}</h2>
+            <span *ngFor="let artista of evento.artisti" class="card-artist">{{ artista }}</span>
+            <p class="card-desc">{{ evento.description }}</p>
+        </div>
+    </div>
+  </div>

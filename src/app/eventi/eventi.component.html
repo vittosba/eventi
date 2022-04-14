@@ -1,0 +1,12 @@
+<div class="container mt-5 pt-5">
+    <ng-container *ngFor="let tipologia of tipologieEventi">
+        <div *ngIf="(tipologia === typology && tipologia !== 'Tutti gli eventi') || (typology === 'Tutti gli eventi' && tipologiaEsiste(tipologia))">
+            <h1 class="mb-3">{{ tipologia }}</h1>
+            <div class="row">
+                <ng-container *ngFor="let evento of eventi">
+                    <app-card-evento *ngIf="evento.category == tipologia" [evento] = "evento" class="col-12 col-md-6 col-lg-3 mb-4"></app-card-evento>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</div>

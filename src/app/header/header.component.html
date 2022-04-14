@@ -1,0 +1,24 @@
+<header class="position-fixed vw-100 p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a routerLink="" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none me-3 fs-1"><span>Ticket</span><span class="col-yellow">Two</span></a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a routerLink="" class="nav-link px-2 text-white cursor-pointer">Home</a></li>
+          <li id="ev-tipologie" class="position-relative">
+            <div id="toggleButton" href="#" class="nav-link px-2 text-white cursor-pointer" (click)="toggleDropdownMenu()">Eventi</div>
+            <ul id="dropdown-tipologia" class="position-absolute site-dropdown-menu">
+              <li class="mb-2" *ngFor="let tipologia of tipologieEventi"><a [routerLink]="['eventi', tipologia]">{{tipologia}}</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+
+        <div class="text-end" *ngIf="registrato !== 'true'">
+          <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
+          <a routerLink="/registration" class="btn btn-warning">Sign-up</a>
+        </div>
+      </div>
+    </div>
+  </header>

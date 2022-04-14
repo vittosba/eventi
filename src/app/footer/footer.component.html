@@ -1,0 +1,12 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let colLink of colLinks" class="col">
+                <div class="footer-title">{{ colLink.title }}</div>
+                <ul>
+                    <li *ngFor="let link of colLink.links"><a href="">{{link}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

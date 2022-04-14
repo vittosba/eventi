@@ -1,0 +1,20 @@
+<div class="h-100 w-100 form-container my-4">
+    <div class="layhover d-flex flex-column align-items-center justify-content-center h-100 w-100">
+        <form #mioform="ngForm" (ngSubmit)="invio(mioform.value)" class="p-3 p-md-5 my-5 my-md-0" *ngIf="registrato !== 'true'">
+        
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="La tua email" [(ngModel)]="email_modello" class="mb-3" required>
+        
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="La tua password" [(ngModel)]="password_modello" class="mb-3" required>
+        
+            <button type="submit" class="btn btn-warning"[disabled]="!mioform.form.valid">Invia</button>
+        </form>
+        <div *ngIf="registrato === 'true'">
+            <!-- <div *ngFor="let item of list">
+
+            </div> -->
+        </div>
+    </div>
+</div>
+

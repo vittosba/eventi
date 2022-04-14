@@ -1,0 +1,38 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+    height: 800px;
+    background-image: url('https://www.cattolicanews.it/Concerto_CattNews.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.layhover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    margin-right: 3rem;
+    color: #fff;
+    font-size: 4rem;
+    animation: visibility 1.5s ease-in-out;
+}
+
+@keyframes visibility {
+    from {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.cards {
+    padding: 30px;
+}
