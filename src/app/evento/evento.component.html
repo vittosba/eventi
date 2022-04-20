@@ -4,10 +4,13 @@
             <img :src="{{ evento.img }}" alt="">
         </div>
         <div class="offset-md-1 col-12 col-md-6 d-flex flex-column">
-            <h1 class="mb-1">
-                <span *ngFor="let artista of evento.artisti; let last = last;">{{ artista }}<span class = "col-yellow" *ngIf="!last"> & </span></span>
-            </h1>
-            <div class="mb-3">{{evento.category}}</div>
+            <h1 class="mb-3">{{ evento.name }}</h1>
+            <h3 class="mb-1">
+                <span *ngFor="let artista of findArtist(evento.id); let last = last;">{{ artista.artName }}<span class = "col-yellow" *ngIf="!last"> & </span></span>
+            </h3>
+            <ng-container *ngFor="let category of categories">
+                <div class="mb-3" *ngIf="evento.category === category.id">{{category.name}}</div>
+            </ng-container>
             <div class="mb-5">{{ evento.description }}</div>
 
         </div>
@@ -18,15 +21,18 @@
             <div>{{ dettaglio.data.slice(2,dettaglio.data.length) }}</div>
             <div>{{ dettaglio.orario }}</div>
         </div>
-        <div class="dove-dettaglio col-7 ps-5">
+        <div class="dove-dettaglio col-5 ps-5">
             <div class="citta">{{ dettaglio.citta }}</div>
             <div>{{ dettaglio.luogo }}</div>
             <div>
                 <span *ngFor="let artista of evento.artisti; let last = last;">{{ artista }}<span *ngIf="!last"> & </span></span>
             </div>
         </div>
-        <div class="col-2 d-flex align-items-center justify-content-center">
-            <button class="dettaglio-btn">Compra</button>
+        <div class="col-2 d-flex align-items-center">
+            <div>{{ dettaglio.prezzo }}$</div>
+        </div>
+        <div *ngIf="registrato == 'true'" class="col-2 d-flex align-items-center justify-content-center">
+            <button (click)="addToCart(evento, dettaglio)" class="dettaglio-btn">Aggiungi al carrello</button>
         </div>
     </div>
 </div>

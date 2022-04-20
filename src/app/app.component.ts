@@ -1,4 +1,5 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, Input } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ export class AppComponent {
   title = 'eventi';
 
     constructor(private renderer: Renderer2) {
-      localStorage.setItem('registrato', "false");
+      window.localStorage.clear();
+      window.localStorage.setItem('registrato', "false");
+      window.localStorage.setItem('cart', "[]");
+      
     this.renderer.listen('window', 'click',(e:Event)=>{
         let dropdownParent = document.getElementById('toggleButton');
 
@@ -26,4 +30,6 @@ export class AppComponent {
         }
         });
     }
+
+
 }

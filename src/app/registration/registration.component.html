@@ -1,48 +1,43 @@
 <div class="h-100 w-100 form-container my-4">
     <div class="layhover d-flex flex-column align-items-center justify-content-center h-100 w-100 p-3">
-        <form #mioform="ngForm" (ngSubmit)="invio(mioform.value)" class="p-3 p-md-5 my-5 my-md-0">
+        <form #mioform="ngForm" (ngSubmit)="saveUser()" class="p-3 p-md-5 my-5 my-md-0">
 
-            <label for="nome">Nome*</label>
-            <input type="text" name="nome" placeholder="Il tuo nome" [(ngModel)]="nome_modello" class="mb-3" required>
+            <label for="name">Nome*</label>
+            <input type="text" name="name" placeholder="Il tuo nome" [(ngModel)]="user.name" class="mb-3" required>
             
-            <label for="cognome">Cognome*</label>
-            <input type="text" name="cognome" placeholder="Il tuo cognome" [(ngModel)]="cognome_modello" class="mb-3" required>
+            <label for="surname">Cognome*</label>
+            <input type="text" name="surname" placeholder="Il tuo cognome" [(ngModel)]="user.surname" class="mb-3" required>
 
             <div>Sesso*</div>
             <div class="d-flex mb-3">
                 <div class="me-3">
                     <label class="me-1" for="m">M</label>
-                    <input type="radio" name="sesso" value="maschio" id="m" [(ngModel)]="sesso_modello" required>
+                    <input type="radio" name="sex" value="m" id="m" [(ngModel)]="user.sex" required>
                 </div>
                 <div>
                     <label class="me-1" for="f">F</label>
-                    <input type="radio" name="sesso" value="femmina" id="f" [(ngModel)]="sesso_modello" required>
+                    <input type="radio" name="sex" value="f" id="f" [(ngModel)]="user.sex" required>
                 </div>
             </div>
 
-            <label for="dataNascita">Data di nascita*</label>
-            <input type="date" name="dataNascita" placeholder="La tua data di nascita" [(ngModel)]="dataNascita_modello" class="mb-3" required>
+            <label for="dateofbirth">Data di nascita*</label>
+            <input type="date" name="dateofbirth" placeholder="La tua data di nascita" [(ngModel)]="user.dateofbirth" class="mb-3" required>
 
-            <label for="luogoNascita">Luogo di nascita*</label>
-            <input type="text" name="luogoNascita" placeholder="Il tuo luogo di nascita" [(ngModel)]="luogoNascita_modello" class="mb-3" required>
-
-            <label for="pv">Provincia*</label>
-            <select name="pv" [(ngModel)]="pv_modello" class="mb-3" required>
-                <option *ngFor="let pv of province" value="{{pv.sigla}}">
-                    {{ pv.nome }}
-                </option>
-            </select>
+            <label for="cityofbirth">Luogo di nascita*</label>
+            <input type="text" name="cityofbirth" placeholder="Il tuo luogo di nascita" [(ngModel)]="user.cityofbirth" class="mb-3" required>
 
             <label for="email">Email*</label>
-            <input type="email" name="email" placeholder="La tua email" [(ngModel)]="email_modello" class="mb-3" required>
+            <input type="email" name="email" placeholder="La tua email" [(ngModel)]="user.email" class="mb-3" required>
         
             <label for="password">Password*</label>
-            <input type="password" name="password" placeholder="La tua password" [(ngModel)]="password_modello" class="mb-3" required>
+            <input type="password" name="password" placeholder="La tua password" [(ngModel)]="user.password" class="mb-3" required>
 
-            <label for="privacy">Privacy</label>
-            <input type="checkbox" name="privacy" [(ngModel)]="privacy_modello" required class="mb-3">
+            <!-- <label for="privacy">Privacy</label>
+            <input type="checkbox" name="privacy" [(ngModel)]="privacy_modello" required class="mb-3"> -->
 
             <button type="submit" class="btn btn-warning" [disabled]="!mioform.form.valid">Invia</button>
+
+            <!-- <button (click)="saveUser()" class="btn btn-success">Submit</button> -->
         </form>
     </div>
 </div>

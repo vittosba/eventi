@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { CategoryService } from './../services/category/category.service';
+import {  Category } from './../models/category.model';
+import { EventService } from './../services/event/event.service';
+import { Eventi } from './../models/eventi.model';
 
 @Component({
   selector: 'app-eventi',
@@ -7,7 +11,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   styleUrls: ['./eventi.component.css']
 })
 export class EventiComponent implements OnInit{
-  tipologieEventi:string[] = ["Concerto", "Sport", "Mostra Museo", "Teatro", "Altre Manifestazioni", "Evento Internazionale", "Prodotto", "Cinema", "Tutti gli eventi"];
+  tipologieEventi:string[] = [
+    "Concerto", "Sport", "Mostra Museo", "Teatro", "Altre Manifestazioni", "Evento Internazionale", "Prodotto", "Cinema", "Tutti gli eventi"
+  ];
   eventi:any[] = [
     {
       id: 0,
@@ -66,32 +72,59 @@ export class EventiComponent implements OnInit{
       description: "Ciaco ciaaoaoaoo"
     }
   ]
-  typology: any;
+  siteCategory: any;
+  categories: Category[] = [];
+  events: Eventi[] = [];
   
-constructor(private route: ActivatedRoute, private router: Router) {
-  this.typology = this.route.snapshot.paramMap.get('typology')!;
-  console.log(this.typology);
+constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private eventService: EventService) {
+  this.siteCategory = this.route.snapshot.paramMap.get('typology')!;
+  this.categoryService.getAll()
+    .subscribe(
+      data => {
+        this.categories = data;    
+        console.log(this.categories);
+      },
+      error => {
+        console.log(error);
+    });
+    this.eventService.getAll()
+    .subscribe(
+      data => {
+        this.events = data;   
+      },
+      error => {
+        console.log(error);
+      });
 }
-
-// ngAfterViewChecked() {
-//   this.typology = this.route.snapshot.paramMap.get('typology')!;
-//   console.log(this.typology);
-// }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.typology = params.get('typology');
+      this.siteCategory = params.get('typology');
     })
   }
 
-  tipologiaEsiste(tipologia:string) {
-      let tipologiaVuota = false;
-    this.eventi.forEach(evento => {
-        if (evento.category === tipologia) {
-            tipologiaVuota = true;
+  categoryExist(category:Category) {
+      let categoryOk = false;
+    this.events.forEach(event => {
+        if (event.category === category.id) {
+          categoryOk = true;
         }
     });
-    return tipologiaVuota;
+    return categoryOk;
+  }
+
+  findEvents(siteCategory:any):any {
+    let siteEvents: Eventi[] = [];
+    this.categories.forEach(category => {
+      if (category.name === siteCategory) {
+        this.events.forEach(event => {
+          if (event.category === category.id) {
+            siteEvents.push(event);
+          }
+        });
+      }
+    });
+    return siteEvents;
   }
 
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { UserService } from './../services/user/user.service';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { User } from './../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -7,49 +9,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-utentiRegistrati: any = [
-  {
-    email: "ciao@ciao.it",
-    password: "12345678"
-  },
-  {
-    email: "test@ciao.it",
-    password: "12345678"
-  },
-  {
-    email: "test@test.it",
-    password: "12345678"
-  },
-  {
-    email: "ciao@test.it",
-    password: "12345678"
-  },
-  {
-    email: "test@ciao.com",
-    password: "12345678"
-  },
-]
 
 password_modello:any;
 email_modello:any;
 
 registrato: any;
-
-invio(form:any) {
-    this.utentiRegistrati.forEach((ut: { email: any; password: any;}) => {
-        if (ut.email == this.email_modello) {
-            if (ut.password == this.password_modello) {
-                this.registrato = true;
-                localStorage.setItem('registrato', "true");
-                this.registrato = localStorage.getItem('registrato');
-            }
-        }
-    });
+utentiRegistrati: User[] = [];
+constructor(private userService: UserService) { 
+  this.userService.getAll()
+      .subscribe(
+        data => {
+          this.utentiRegistrati = data;          
+        },
+        error => {
+          console.log(error);
+        });
 }
+
+login() {
+  this.utentiRegistrati.forEach(ur => {
+    if (ur.email === this.email_modello) {
+      if (ur.password === this.password_modello) {
+        window.localStorage.setItem('registrato', "true");
+                window.dispatchEvent( new Event('storage'))
+                this.registrato = localStorage.getItem('registrato');
+                this.email_modello = '';
+                this.password_modello = '';
+      }
+    }
+  });
+}
+
+// this.utentiRegistrati.array.forEach(element => {
   
-  constructor() { 
+// });
+
+// invio(form:any) {
+//     this.utentiRegistrati.forEach((ut: { email: any; password: any; }) => {
+//         if (ut.email == this.email_modello) {
+//             if (ut.password == this.password_modello) {
+//                 window.localStorage.setItem('registrato', "true");
+//                 window.dispatchEvent( new Event('storage'))
+//                 this.registrato = localStorage.getItem('registrato');
+//             }
+//         }
+//     });
+// }
+  
+  
+
+   @HostListener('window:storage')
+  onStorageChange() {
     this.registrato = localStorage.getItem('registrato');
-   }
+  }
 
   ngOnInit(): void {
   }

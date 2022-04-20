@@ -1,5 +1,5 @@
 <div class="container mt-5 pt-5">
-    <ng-container *ngFor="let tipologia of tipologieEventi">
+    <!-- <ng-container *ngFor="let tipologia of tipologieEventi">
         <div *ngIf="(tipologia === typology && tipologia !== 'Tutti gli eventi') || (typology === 'Tutti gli eventi' && tipologiaEsiste(tipologia))">
             <h1 class="mb-3">{{ tipologia }}</h1>
             <div class="row">
@@ -9,4 +9,25 @@
             </div>
         </div>
     </ng-container>
+    <ng-container *ngFor="let event of events">
+        <app-card-evento *ngIf="event.category_id === idCategory " [evento] = "event" class="col-12 col-md-6 col-lg-3 mb-4"></app-card-evento>
+    </ng-container> -->
+    <div *ngIf="siteCategory !== 'Tutti gli eventi'" class="row">
+        <h1 class="mb-3">{{ siteCategory }}</h1>
+        <ng-container *ngIf="findEvents(siteCategory).length > 0 ">
+            <app-card-evento *ngFor="let event of findEvents(siteCategory)" [evento] = "event" class="col-12 col-md-6 col-lg-3 mb-4"></app-card-evento>
+        </ng-container>
+        <div *ngIf="findEvents(siteCategory).length <= 0" >Nessun evento per questa categoria</div>
+    </div>
+    <div *ngIf="siteCategory === 'Tutti gli eventi'" class="row">
+        <h1 class="mb-5">Tutti gli eventi</h1>
+        <ng-container *ngFor="let category of categories">
+            <div *ngIf="categoryExist(category)">
+                <h2>{{ category.name }}</h2>
+                <div class="row">
+                    <app-card-evento *ngFor="let event of findEvents(category.name)" [evento] = "event" class="col-12 col-md-6 col-lg-3 mb-4"></app-card-evento>
+                </div>
+            </div>
+        </ng-container>
+    </div>
 </div>

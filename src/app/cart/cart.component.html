@@ -1,0 +1,23 @@
+<div id="cart" class="translate">
+    <div class="d-flex">
+        <button (click)="closeCart()" class="btn btn-warning mb-5 me-5">X</button>
+        <h2>Carrello</h2>
+    </div>
+    <div *ngFor="let ev of a; let i = index" class="mb-3 row ticket">
+        <div class="col-1 d-flex align-items-center">
+            <div>{{ev.dettaglio.prezzo}}$</div>
+        </div>
+        <div class="col-3 text-center">
+            <div>{{ev.dettaglio.data}}</div>
+            <div>{{ev.dettaglio.orario}}</div>
+        </div>
+        <div class="col-7 text-center">
+            <div>{{ev.evento.title}}</div>
+            <div>{{ev.dettaglio.citta}}</div>
+        </div>
+        <div class="col-1 d-flex align-items-center">
+            <i (click)="removeEv(i)" class="fa-solid fa-trash"></i>
+        </div>
+    </div>
+    <div>Totale: {{totale}}$</div>
+</div>

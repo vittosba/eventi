@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { EventoComponent } from './evento/evento.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PrenotazioneComponent } from './prenotazione/prenotazione.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -26,16 +28,18 @@ import { PrenotazioneComponent } from './prenotazione/prenotazione.component';
     LoginComponent,
     EventoComponent,
     RegistrationComponent,
-    PrenotazioneComponent
+    PrenotazioneComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(
       [
         { path: '', component: HomeComponent},
-        { path: 'eventi/:typology', component: EventiComponent },
+        { path: 'eventi/:typology', component: EventiComponent},
         { path: 'login', component: LoginComponent },
         { path: 'registration', component: RegistrationComponent },
         { path: 'evento/:id', component: EventoComponent }

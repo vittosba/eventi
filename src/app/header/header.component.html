@@ -8,16 +8,26 @@
           <li id="ev-tipologie" class="position-relative">
             <div id="toggleButton" href="#" class="nav-link px-2 text-white cursor-pointer" (click)="toggleDropdownMenu()">Eventi</div>
             <ul id="dropdown-tipologia" class="position-absolute site-dropdown-menu">
-              <li class="mb-2" *ngFor="let tipologia of tipologieEventi"><a [routerLink]="['eventi', tipologia]">{{tipologia}}</a></li>
+              <li class="mb-2" *ngFor="let category of categories"><a [routerLink]="['eventi', category.name]">{{category.name}}</a></li>
+              <li class="mb-2"><a [routerLink]="['eventi', 'Tutti gli eventi']">Tutti gli eventi</a></li>
             </ul>
           </li>
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
 
-        <div class="text-end" *ngIf="registrato !== 'true'">
-          <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
-          <a routerLink="/registration" class="btn btn-warning">Sign-up</a>
+        <div class="text-end">
+          <button *ngIf="registrato === 'true'" (click)="openCart()" class="header-cart btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div *ngIf="cart.length > 0" class="nCart">{{cart.length}}</div>
+          </button>
+          <span *ngIf="registrato !== 'true'">
+            <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
+            <a routerLink="/registration" class="btn btn-warning">Sign-up</a>
+          </span>
+          <button *ngIf="registrato === 'true'" class="btn btn-warning" (click)="logout()">
+            Logout
+          </button>
         </div>
       </div>
     </div>

@@ -1,0 +1,22 @@
+#cart {
+    position: fixed;
+    right: 0;
+    height: 100vh;
+    width: 25%;
+    padding: 20px;
+    background: #fff;
+    z-index: 1;
+    transition: all 1s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.translate{
+    transform: translateX(100%);
+}
+
+.ticket {
+    background: #21252A;
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+}

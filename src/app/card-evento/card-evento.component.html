@@ -4,9 +4,11 @@
             <img :src="{{ evento.img }}">
         </div>
         <div class="card-details">
-            <div>{{evento.category}}</div>
-            <h2>{{ evento.title }}</h2>
-            <span *ngFor="let artista of evento.artisti" class="card-artist">{{ artista }}</span>
+            <ng-container *ngFor="let category of categories">
+                <div *ngIf="evento.category === category.id">{{category.name}}</div>
+            </ng-container>
+            <h2>{{ evento.name }}</h2>
+            <span *ngFor="let artista of findArtist(evento.id)" class="card-artist">{{ artista.artName }} </span>
             <p class="card-desc">{{ evento.description }}</p>
         </div>
     </div>
