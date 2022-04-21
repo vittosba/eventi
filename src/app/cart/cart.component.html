@@ -3,21 +3,25 @@
         <button (click)="closeCart()" class="btn btn-warning mb-5 me-5">X</button>
         <h2>Carrello</h2>
     </div>
-    <div *ngFor="let ev of a; let i = index" class="mb-3 row ticket">
+    <div *ngFor="let ev of carrelloCompatto; let i = index" class="mb-3 row ticket">
         <div class="col-1 d-flex align-items-center">
-            <div>{{ev.dettaglio.prezzo}}$</div>
+            <div>{{ev.ev.dettaglio.price}}$</div>
         </div>
         <div class="col-3 text-center">
-            <div>{{ev.dettaglio.data}}</div>
-            <div>{{ev.dettaglio.orario}}</div>
+            <div>{{ev.ev.dettaglio.date}}</div>
+            <div>{{ev.ev.dettaglio.timeStart}}</div>
         </div>
-        <div class="col-7 text-center">
-            <div>{{ev.evento.title}}</div>
-            <div>{{ev.dettaglio.citta}}</div>
+        <div class="col-6 text-center">
+            <div>{{ev.ev.evento.name}}</div>
+            <div>{{ev.ev.dettaglio.city}}</div>
+        </div>
+        <div class="col-1 d-flex align-items-center">
+            X{{ ev.quantita }}
         </div>
         <div class="col-1 d-flex align-items-center">
             <i (click)="removeEv(i)" class="fa-solid fa-trash"></i>
         </div>
     </div>
-    <div>Totale: {{totale}}$</div>
+    <div class="mb-3">Totale: {{totale}}$</div>
+    <button (click)="openPrenotazione()" class="btn btn-warning">Acquista</button>
 </div>

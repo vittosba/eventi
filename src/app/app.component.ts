@@ -10,9 +10,15 @@ export class AppComponent {
   title = 'eventi';
 
     constructor(private renderer: Renderer2) {
-      window.localStorage.clear();
-      window.localStorage.setItem('registrato', "false");
-      window.localStorage.setItem('cart', "[]");
+      if (sessionStorage.getItem('loggato') === null) {
+        sessionStorage.setItem('loggato', 'false');
+        sessionStorage.setItem('whoLog', '');
+      }
+      if (sessionStorage.getItem('cart') === null) {
+        sessionStorage.setItem('cart', '[]');
+      }
+
+      
       
     this.renderer.listen('window', 'click',(e:Event)=>{
         let dropdownParent = document.getElementById('toggleButton');

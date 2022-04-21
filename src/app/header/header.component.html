@@ -17,15 +17,15 @@
         </ul>
 
         <div class="text-end">
-          <button *ngIf="registrato === 'true'" (click)="openCart()" class="header-cart btn">
+          <button (click)="openCart()" class="header-cart btn">
             <i class="fa-solid fa-cart-shopping"></i>
             <div *ngIf="cart.length > 0" class="nCart">{{cart.length}}</div>
           </button>
-          <span *ngIf="registrato !== 'true'">
+          <span *ngIf="loggato !== 'true'">
             <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
             <a routerLink="/registration" class="btn btn-warning">Sign-up</a>
           </span>
-          <button *ngIf="registrato === 'true'" class="btn btn-warning" (click)="logout()">
+          <button *ngIf="loggato === 'true'" class="btn btn-warning" (click)="logout()">
             Logout
           </button>
         </div>

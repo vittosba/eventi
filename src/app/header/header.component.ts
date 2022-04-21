@@ -8,10 +8,10 @@ import { Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angu
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  registrato:any;
+  loggato:any;
   cart:any = [];
   categories:any = [];
-  tipologieEventi:string[] = ["Concerto", "Sport", "Mostra Museo", "Teatro", "Altre Manifestazioni", "Evento Internazionale", "Prodotto", "Cinema", "Tutti gli eventi"];
+  // tipologieEventi:string[] = ["Concerto", "Sport", "Mostra Museo", "Teatro", "Altre Manifestazioni", "Evento Internazionale", "Prodotto", "Cinema", "Tutti gli eventi"];
   
     toggleDropdownMenu() {
         let dorpdownItems = document.querySelectorAll('.site-dropdown-item');
@@ -43,12 +43,16 @@ export class HeaderComponent implements OnInit {
     }
 
     logout() {
-      window.localStorage.setItem('registrato', "false");
+      window.sessionStorage.setItem('loggato', "false");
+      window.sessionStorage.setItem('whoLog', '');
       window.dispatchEvent( new Event('storage'))
-      this.registrato = localStorage.getItem('registrato');
+      this.loggato = sessionStorage.getItem('loggato');
     }
     
   constructor(private categoryService: CategoryService) { 
+    this.loggato = sessionStorage.getItem('loggato');
+    let locCart:any = sessionStorage.getItem('cart');
+    this.cart = JSON.parse(locCart);
     this.categoryService.getAll()
       .subscribe(
         data => {
@@ -62,8 +66,8 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:storage')
   onStorageChange() {
-    this.registrato = localStorage.getItem('registrato');
-    let locCart:any = localStorage.getItem('cart');
+    this.loggato = sessionStorage.getItem('loggato');
+    let locCart:any = sessionStorage.getItem('cart');
     this.cart = JSON.parse(locCart);
     // console.log(this.cart);
   }

@@ -42,6 +42,7 @@ import { CartComponent } from './cart/cart.component';
         { path: 'eventi/:typology', component: EventiComponent},
         { path: 'login', component: LoginComponent },
         { path: 'registration', component: RegistrationComponent },
+        { path: 'prenotazione', component: PrenotazioneComponent },
         { path: 'evento/:id', component: EventoComponent }
       ]
     )

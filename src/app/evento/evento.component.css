@@ -14,7 +14,10 @@ img {
 }
 
 .quando-dettaglio {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-right: 3px solid #21252A;
 }
 

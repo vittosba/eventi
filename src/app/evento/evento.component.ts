@@ -8,6 +8,9 @@ import { ArtistsEventService } from './../services/artistEvent/artists-event.ser
 import {  ArtistsEvent } from './../models/artistsEvent.model';
 import { CategoryService } from './../services/category/category.service';
 import {  Category } from './../models/category.model';
+import { EventDetailsService } from './../services/eventDetails/event-details.service';
+import { EventDetails } from './../models/eventDetails.model';
+
 
 @Component({
   selector: 'app-evento',
@@ -15,7 +18,7 @@ import {  Category } from './../models/category.model';
   styleUrls: ['./evento.component.css']
 })
 export class EventoComponent implements OnInit {
-  registrato:any;
+  loggato:any;
   // eventi:any[] = [
   //   {
   //     id: 0,
@@ -95,8 +98,9 @@ export class EventoComponent implements OnInit {
   artists: Artist[] = [];
   artistsEvents: ArtistsEvent[] = [];
   categories: Category[] = [];
+  eventDetails: EventDetails[] = [];
   
-constructor(private route: ActivatedRoute, private eventService: EventService, private artistService: ArtistService, private artistEventService: ArtistsEventService, private categoryService: CategoryService) {
+constructor(private route: ActivatedRoute, private eventService: EventService, private artistService: ArtistService, private artistEventService: ArtistsEventService, private categoryService: CategoryService, private eventDetailsService: EventDetailsService) {
   this.idEvento = this.route.snapshot.paramMap.get('id')!;
   this.eventService.get(this.idEvento)
       .subscribe(
@@ -106,7 +110,7 @@ constructor(private route: ActivatedRoute, private eventService: EventService, p
         error => {
           console.log(error);
         });
-  this.registrato = localStorage.getItem('registrato');
+  this.loggato = sessionStorage.getItem('loggato');
   this.artistService.getAll()
     .subscribe(
       data => {
@@ -133,6 +137,15 @@ constructor(private route: ActivatedRoute, private eventService: EventService, p
       error => {
         console.log(error);
     });
+
+    this.eventDetailsService.getAll()
+    .subscribe(
+      data => {
+        this.eventDetails = data;    
+      },
+      error => {
+        console.log(error);
+    });
 }
 
 addToCart(evento:any, dettaglio:any) {
@@ -143,12 +156,12 @@ addToCart(evento:any, dettaglio:any) {
   }
 
   let cart:any = [];
-  if (localStorage.getItem('cart') !== null) {
-    let locCart:any = localStorage.getItem('cart');
+  if (sessionStorage.getItem('cart') !== null) {
+    let locCart:any = sessionStorage.getItem('cart');
     cart = JSON.parse(locCart);
   }
   cart.push(elCart);
-  localStorage.setItem('cart', JSON.stringify(cart));
+  sessionStorage.setItem('cart', JSON.stringify(cart));
   window.dispatchEvent( new Event('storage'))
 }
 
@@ -166,12 +179,22 @@ findArtist(eventId:number):any {
   return artistEv;
 }
 
+findDetails(eventId:number):any {
+  let detailsEv: any[] = [];
+  this.eventDetails.forEach(details => {
+    if (details.event === eventId) {
+          detailsEv.push(details);
+    }
+  });
+  return detailsEv;
+}
+
   ngOnInit(): void {
   }
 
   @HostListener('window:storage')
   onStorageChange() {
-    this.registrato = localStorage.getItem('registrato');
+    this.loggato = sessionStorage.getItem('loggato');
   }
 
 }
